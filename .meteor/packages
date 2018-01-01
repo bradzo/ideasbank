@@ -20,6 +20,12 @@ session
 
 twbs:bootstrap
 summernote:summernote
-natestrauser:select2
-zimme:select2-bootstrap3-css
+
+jesperwe:bootstrap-select
+
+
+frozeman:persistent-minimongo2      # persists minmongo on device - no need to setup mongodb database and get ppl to register - may add that later
+
+
+epaminond:nodemailer        # allow users to email the list of projects etc as a spreadsheet - see: https://atmospherejs.com/epaminond/nodemailer
 

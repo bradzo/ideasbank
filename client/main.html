@@ -6,40 +6,66 @@
   
 
   {{> main}}
+  
 </body>
 
 
 <template name="main">
 
-<div class="container">
+<div class="container gradient">
 
-    <h1>Ideas Bank</h1>
-
-    <form>
-        <div class="form-group">
-            <select name="projects" id="projects">
-                <option value="add">Add New Project</option>
-                {{#each projects}}
-                    <option value="{{_id}}">{{name}}</option>
-                {{/each}}
-            </select>
+    <div class="row">
+        <div class="col-sm-9 col-md-9 col-lg-9">
+            <h2>Ideas Bank</h2>
         </div>
-    </form>
-
-    <h2>Current Ideas</h2>
-    <div>
-        <ul class="list-group">
-        {{#each ideas}}
-            <li class="list-group-item">{{name}}
-
-                <span class = "badge">Edit</span>
-
-            </li>
-        {{/each}}
-        </ul>
     </div>
+    
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <form>
+                <div class="form-group">
+                    <label for="projects">Select A Project...</label>
+                    <select name="projects" id="projects" class="selectpicker form-control">
+                        <option></option>
+                        <option value="add">Add New Project</option>
+                        {{#each projects}}
+                            <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </form>
 
+        </div>  
+    </div>  
+    <div class="row">
+        <div class="col-sm-9 col-md-9 col-lg-9">
+            <span><strong>{{forSelectedProject}}</strong></span>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <button id="addIdea" class="btn btn-primary btn-block">Add Idea</button>
+        </div>
+    </div>  
 
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <ul class="list-group">
+            {{#each ideas}}
+                <li class="list-group-item">{{name}}
+                    <span class = "badge">Edit</span>
+                </li>
+            {{/each}}
+            </ul>
+        </div>
+    </div>  
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+                <img src="/thought-2123970_640.jpg" class="img-responsive" style="width: 100%; padding-top: 5px" />
+        </div>
+    </div>
+ 
 </div>
 
 
@@ -62,16 +88,10 @@
                 <label for="why">Why?</label><br/>
                 <div id="why"></div>
             </div>
-
             <div class="form-group">
-
                 <label for="how">How?</label><br/>
                 <div id="how"></div>
-
             </div>
-
-
-            <button id="saveIdea" class="btn btn-primary">Save Idea</button>
         </form>
 
       </div>
@@ -83,6 +103,4 @@
   </div>
 </div>
 
-
 </template>
-

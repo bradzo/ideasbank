@@ -3,13 +3,23 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
+Template.main.onCreated(function() {
+
+});
+
 Template.main.onRendered(function() {
 
-  getProjects();
-  getIdeas();
+  var options = {
+    liveSearch: true,
+    style: "btn-info"
+  };
 
+  if (Meteor.isCordova) {
+    options.mobile = true;
+  }
 
-  $("#projects").select2();
+  $("#projects").selectpicker(options);
+  $('#projects').selectpicker('refresh');
 
   $('#why').summernote({
     height: 150,                 // set editor height
@@ -28,44 +38,34 @@ Template.main.onRendered(function() {
 
 });
 
-Template.main.helpers({
-
-  projects: function() {
-    return Session.get("projects");
-  },
-  ideas: function() {
-
-    return Session.get("ideas");
-
-  }
-
-});
-
 Template.main.events({
+
   'change #projects' : function() {
-    var id = $('#projects').val();
-    if (id === "add") {
+    var projectId = $('#projects').val();
+    if (projectId === "add") {
       // popup a modal to add a new project
-      console.log("add new project");
+      alert("add new project");
     } else {
       // populate the list of ideas for this project
-      getIdeas(id);   // id of the idea
-      console.log(id);
+      console.log("projectId: ", projectId);
+      // see: https://stackoverflow.com/a/47475080/4222207
+      var ideaName = $('#projects option:selected').text();
+      console.log("ideaName = " , ideaName);
+      Session.set("projectName",ideaName);
+
+      Session.set("ideas", ideas.find({projectId:projectId}).fetch());   // id of the idea - put it into a Session var and the list will appear
     }
+  },
+  'click #addIdea' : function() {
+    $('#myModal').modal('toggle');
+  }
+});
+
+Template.main.helpers({
+  ideas: function() {
+    var x = Session.get("ideas");
+    return x || false;
   }
 })
 
 
-function getIdeas(id) {
-  Meteor.call("getIdeas",id,function(error,results) {
-    console.log(results);
-    Session.set("ideas",results);
-  });
-}
-
-function getProjects() {
-  Meteor.call("getProjects",function(error,results) {
-    Session.set("projects",results);
-    console.log(results);
-  })
-}

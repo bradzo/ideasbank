@@ -1,1 +1,19 @@
 /* CSS declarations go here */
+
+html, body {
+    height:100%;
+    margin:0px;
+  }
+  
+  .container{
+    height:100%;
+  }
+  
+  .gradient {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(cyan));
+  }
+
+
+
+  img {max-width: 100%;}
+  
