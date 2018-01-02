@@ -5,12 +5,16 @@ import './main.html';
 
 Template.main.onCreated(function() {
 
+    if (projects.find({}).count() <=1 ) {
+      console.log("nothing exists yet - add some example projects!");
+
+      projects.insert({name:"Project 1"});
+    }
 });
 
 Template.main.onRendered(function() {
 
   var options = {
-    liveSearch: true,
     style: "btn-info"
   };
 
@@ -52,6 +56,7 @@ Template.main.events({
       var ideaName = $('#projects option:selected').text();
       console.log("ideaName = " , ideaName);
       Session.set("projectName",ideaName);
+      Session.set("projectId",projectId);   // save ths for when they click the Add Idea button - we need to add ther idea under this projectId
 
       Session.set("ideas", ideas.find({projectId:projectId}).fetch());   // id of the idea - put it into a Session var and the list will appear
     }
