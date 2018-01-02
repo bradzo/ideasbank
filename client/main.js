@@ -8,7 +8,13 @@ Template.main.onCreated(function() {
     if (projects.find({}).count() <=1 ) {
       console.log("nothing exists yet - add some example projects!");
 
-      projects.insert({name:"Project 1"});
+      var pId = projects.insert({name:"Project 1"});
+      console.log("new projectId: " + pId);
+
+      ideas.insert({projectId:pId,name:"Idea 1 for Project 1"});
+      ideas.insert({projectId:pId,name:"Idea 2 for Project 1"});
+      ideas.insert({projectId:pId,name:"Idea 3 for Project 1"});
+
     }
 });
 
@@ -44,7 +50,7 @@ Template.main.onRendered(function() {
 
 Template.main.events({
 
-  'click #projects' : function() {
+  'change #projects' : function() {
     var projectId = $('#projects').val();
     if (projectId === "add") {
       // popup a modal to add a new project
