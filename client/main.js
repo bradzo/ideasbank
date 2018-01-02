@@ -40,7 +40,7 @@ Template.main.onRendered(function() {
 
 Template.main.events({
 
-  'change #projects' : function() {
+  'click #projects' : function() {
     var projectId = $('#projects').val();
     if (projectId === "add") {
       // popup a modal to add a new project
