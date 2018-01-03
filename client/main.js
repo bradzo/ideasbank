@@ -5,6 +5,8 @@ import './main.html';
 
 Template.main.onCreated(function() {
 
+  console.log(projects.find({}).count());
+  
     if (projects.find({}).count() <=1 ) {
       console.log("nothing exists yet - add some example projects!");
 
@@ -54,7 +56,9 @@ Template.main.events({
     var projectId = $('#projects').val();
     if (projectId === "add") {
       // popup a modal to add a new project
-      alert("add new project");
+      //alert("add new project");
+      Session.set("ideas",[]);
+      $('#myModal').modal('toggle');
     } else {
       // populate the list of ideas for this project
       console.log("projectId: ", projectId);
@@ -76,7 +80,11 @@ Template.main.helpers({
   ideas: function() {
     var x = Session.get("ideas");
     return x || false;
+  },
+  forSelectedProject: function() {
+    return Session.get("projectName");
   }
-})
+});
+
 
 
